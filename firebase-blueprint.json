@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A student profile on the PUZZLES platform.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "bio": { "type": "string" },
+        "interests": { "type": "array", "items": { "type": "string" } },
+        "house": { "type": "string" },
+        "personality": { "type": "object" },
+        "points": { "type": "number" },
+        "badges": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["uid", "email"]
+    },
+    "Community": {
+      "title": "Community",
+      "description": "A student-led community or club.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["gaming", "music", "study", "social"] },
+        "members": { "type": "array", "items": { "type": "string" } },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Room": {
+      "title": "Room",
+      "description": "A gaming or music jam room.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "communityId": { "type": "string" },
+        "type": { "type": "string", "enum": ["gaming", "music"] },
+        "name": { "type": "string" },
+        "activeUsers": { "type": "array", "items": { "type": "string" } },
+        "currentActivity": { "type": "object" }
+      }
+    },
+    "Laundry": {
+      "title": "Laundry Machine",
+      "description": "Status of a campus laundry machine.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "house": { "type": "string" },
+        "status": { "type": "string", "enum": ["available", "in-use", "broken"] },
+        "timeRemaining": { "type": "number" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      }
+    },
+    "StudySpot": {
+      "title": "Study Spot",
+      "description": "A campus study area.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "location": { "type": "object" },
+        "occupancy": { "type": "number" },
+        "noiseLevel": { "type": "string", "enum": ["quiet", "moderate", "loud"] }
+      }
+    },
+    "MoodLog": {
+      "title": "Mood Log",
+      "description": "A student's daily mood check-in.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "mood": { "type": "string", "enum": ["happy", "stressed", "tired", "motivated"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles" },
+    "/communities/{id}": { "schema": "Community", "description": "Campus communities" },
+    "/rooms/{id}": { "schema": "Room", "description": "Active rooms" },
+    "/laundry/{id}": { "schema": "Laundry", "description": "Laundry machine status" },
+    "/study_spots/{id}": { "schema": "StudySpot", "description": "Study space occupancy" },
+    "/mood_logs/{id}": { "schema": "MoodLog", "description": "Anonymous mood tracking" }
+  }
+}

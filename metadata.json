@@ -1,0 +1,5 @@
+{
+  "name": "PUZZLES",
+  "description": "An AI-powered residential campus platform for community discovery, social matching, and smart dormitory management.",
+  "requestFramePermissions": ["microphone", "geolocation"]
+}
